@@ -1,25 +1,26 @@
 import RPi.GPIO as GPIO
 import time
 
-LED_PIN = 18
-PWM_FREQ = 100
+led = 24
 
+GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(LED_PIN, GPIO.OUT)
+GPIO.setup(led, GPIO.OUT, initial=GPIO.LOW)
 
-pwm = GPIO.PWM(LED_PIN, PWM_FREQ)
-pwm.start(0)
+p = GPIO.PWM(led, 1000)
+p.start(0)
 
-try:
-    while True:
-        for duty_cycle in range(0, 101, 5):
-            pwm.ChangeDutyCycle(duty_cycle)
-            time.sleep(0.1)
-        for duty_cycle in range(100, -1, -5):
-            pwm.ChangeDutyCycle(duty_cycle)
-            time.sleep(0.1)
-except KeyboardInterrupt:
-    pass
+dutyratio = 0
+for i in range(3):
+    for j in range(5):
+        dutyratio += 10
+        p.ChangeDutyCycle(dutyratio)
+        time.sleep(1)
+    for j in range(5):
+        dutyratio -= 10
+        p.ChangeDutyCycle(dutyratio)
+        time.sleep(1)
+    
 
-pwm.stop()
+p.stop()
 GPIO.cleanup()
