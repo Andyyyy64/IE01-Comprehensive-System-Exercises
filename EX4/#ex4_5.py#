@@ -7,7 +7,7 @@
 #  
 import smbus
 import time
-import datetime
+import datatime
 # Define some device parameters
 I2C_ADDR  = 0x3f # I2C device address, if any error, change this address to 0x27
 LCD_WIDTH = 16   # Maximum characters per line
@@ -97,11 +97,11 @@ def main():
     time.sleep(5)
 
     date_string = f"{now.year}.{now.month}.{now.day}"
-    time_string = f"{now.hour}:{now.minute}:{now.second}"
+    time_string = f"{now.hour}:{now.minute}:{now.second}""""""""""""""""""""""""""""""""
     lcd_string(date_string, LCD_LINE_1)
     lcd_string(time_string, LCD_LINE_2)
 
-    time.sleep(5)
+
 
 if __name__ == '__main__':
 
