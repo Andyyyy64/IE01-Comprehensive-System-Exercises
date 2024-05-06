@@ -1,15 +1,15 @@
 import RPi.GPIO as GPIO
 import time
 
-LED_PIN = 18
+led = 24
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(LED_PIN, GPIO.OUT)
+GPIO.setup(led, GPIO.OUT, initial=GPIO.LOW)
 
-while True:
-    GPIO.output(LED_PIN, GPIO.HIGH)
+for i in range(10):
+    GPIO.output(led,1)
     time.sleep(1)
-    GPIO.output(LED_PIN, GPIO.LOW)
+    GPIO.output(led,0)
     time.sleep(1)
-
+    
 GPIO.cleanup()
